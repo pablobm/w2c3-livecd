@@ -3,5 +3,6 @@
 set -e
 
 lb config noauto \
-	--archive-areas 'main contrib non-free'
+	--archive-areas 'main contrib non-free' \
+	--debian-installer live \
 	"${@}"
