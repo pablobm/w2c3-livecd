@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cp -pr chroot/lib/firmware/b43 binary/firmware/
