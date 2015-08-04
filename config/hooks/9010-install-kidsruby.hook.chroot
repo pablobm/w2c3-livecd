@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+# Install KidsRuby
+#
+# KidsRuby is not available at a package repository,
+# so we have to download and install it manually.
+#
+# Hat tip to https://s3.amazonaws.com/kidsruby/linux+i686/kidsruby-1.4.0-i686.deb
+
+URL='https://s3.amazonaws.com/kidsruby/linux+i686/kidsruby-1.4.0-i686.deb'
+FILE=`mktemp`
+wget "$URL" -qO $FILE && sudo dpkg -i $FILE
+rm $FILE

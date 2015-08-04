@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+alias ruby=ruby2.1
+alias irb=ruby2.1
