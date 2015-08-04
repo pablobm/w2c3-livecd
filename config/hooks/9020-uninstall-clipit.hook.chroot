@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+# Uninstall ClipIt
+#
+# 1) ClipIt's message on first login is confusing for the user
+# 2) This is a distro for shared computers. No need to keep long-lived
+#    copies of the clipboard history
+
+apt-get remove --purge -y clipit
