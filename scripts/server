@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+WORKING_DIR=$1
+cd $WORKING_DIR
+python -mSimpleHTTPServer 12345
