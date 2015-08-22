@@ -1,5 +1,17 @@
 #!/usr/bin/env sh
 
-WORKING_DIR=$1
-cd $WORKING_DIR
-python -mSimpleHTTPServer 12345
+while getopts ':P:' opt; do
+  case $opt in
+    P)
+      PID_FILE_PATH="$OPTARG"
+      ;;
+  esac
+done
+
+shift $((OPTIND-1))
+WORKING_DIR="$*"
+cd "$WORKING_DIR"
+
+python -mSimpleHTTPServer 12345 &
+bg
+echo $! > "$PID_FILE_PATH"
