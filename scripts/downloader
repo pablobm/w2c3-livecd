@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+while getopts ':d:l:' opt; do
+  case $opt in
+    d)
+      DOWNLOADS_DIR="$OPTARG"
+      ;;
+    l)
+      LOCAL_FILES_DIR="$OPTARG"
+      ;;
+  esac
+done
+
+shift $((OPTIND-1))
+DOWNLOADS_LIST_PATH="$*"
+
+cat "$DOWNLOADS_LIST_PATH" | while read -r NAME URL; do
+  DEST_PATH="$DOWNLOADS_DIR/$NAME"
+  if echo $URL | grep -qE '^https?://' ; then
+    wget -c --output-document "$DEST_PATH" "$URL"
+  else
+    cp "$LOCAL_FILES_DIR/$URL" "$DEST_PATH"
+  fi
+done

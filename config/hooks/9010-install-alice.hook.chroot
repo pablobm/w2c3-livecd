@@ -1,0 +1,15 @@
+#!/bin/sh
+
+set -e
+
+# Install Alice 3 (http://www.alice.org)
+
+WORKING_DIR=$(mktemp -d /tmp/tmp.XXXXXXXXXXXXX)
+INSTALL_DIR=/opt/alice3
+
+cd "$WORKING_DIR"
+wget http://localhost:12345/alice
+wget http://localhost:12345/alice.varfile
+sh ./alice -q -dir "$INSTALL_DIR" -varfile ./alice.varfile
+cp "/opt/alice3/Alice 3.desktop" /etc/skel/Desktop/
+rm alice alice.varfile
