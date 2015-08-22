@@ -11,3 +11,5 @@ cd "$WORKING_DIR"
 wget http://localhost:12345/alice
 wget http://localhost:12345/alice.varfile
 sh ./alice -q -dir "$INSTALL_DIR" -varfile ./alice.varfile
+cp "/opt/alice3/Alice 3.desktop" /etc/skel/Desktop/
+rm alice alice.varfile
