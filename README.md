@@ -102,13 +102,15 @@ Getting Alice (the 3D development environment) installed wasn't trivial. Problem
 
 Solution:
 
-  * Download installer to `cache/` (it not already downloaded)
-  * Run a simple http server (using Python's built-in SimpleHTTPServer) that can serve the installer
+  * Download the Alice installer to `cache/` (if not already downloaded)
+  * Run a simple http server (using Python's built-in `SimpleHTTPServer`) that can serve the installer
   * Run the build
-  * On a chroot hook, download the installer from the local HTTP server into the chroot jail
+  * On a chroot hook, download the installer from the local http server into the chroot jail
   * Run the installer
 
 Additionally, there's the file `alice.varfile`, which provides installation details. It allows running the installer in non-interactive mode.
+
+The main relevant files in this process are `auto/build` and `scripts/*`.
 
 ## TODO
 
