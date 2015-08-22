@@ -30,10 +30,12 @@ You can use [VirtualBox](https://www.virtualbox.org/) or any similar software. T
 
   5. You'll need the Guest Additions package. On the menu bar, go to "Devices > Install Guest Additions CD image", and install as follows:
 
-    # cd /media/cdrom
-    # sh VBoxLinuxAdditions.run
+```
+# cd /media/cdrom
+# sh VBoxLinuxAdditions.run
+```
 
-  6. Restart the VM
+Finally restart the VM and you'll be set.
 
 ### Installing required packages
 
@@ -41,16 +43,22 @@ As mentioned above, do everything as root. Using `sudo` is not enough.
 
 First install live-build and git:
 
-    # apt-get install live-build git
+```
+# apt-get install live-build git
+```
 
 Next, clone this repository:
 
-    # git clone https://github.com/pablobm/w2c3-livecd.git
+```
+# git clone https://github.com/pablobm/w2c3-livecd.git
+```
 
 And finally, run a build:
 
-    # cd w2c3-livecd
-    # lb clean && lb config && lb build
+```
+# cd w2c3-livecd
+# lb clean && lb config && lb build
+```
 
 This will take a while! The first time it will download packages over the Internet and will take longer. Fortunately, these will be cached (under `cache/`) making this step faster in subsequent builds.
 
