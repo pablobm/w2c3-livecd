@@ -14,15 +14,8 @@ done
 shift $((OPTIND-1))
 DOWNLOADS_LIST_PATH="$*"
 
-echo "DOWNLOADS_DIR: $DOWNLOADS_DIR"
-echo "DOWNLOADS_LIST_PATH: $DOWNLOADS_LIST_PATH"
-echo "LOCAL_FILES_DIR: $LOCAL_FILES_DIR"
-
 cat "$DOWNLOADS_LIST_PATH" | while read -r NAME URL; do
   DEST_PATH="$DOWNLOADS_DIR/$NAME"
-  echo "NAME: $NAME"
-  echo "URL: $URL"
-  echo "DEST_PATH: $DEST_PATH"
   if echo $URL | grep -qE '^https?://' ; then
     wget -c --output-document "$DEST_PATH" "$URL"
   else
