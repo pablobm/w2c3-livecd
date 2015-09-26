@@ -4,7 +4,7 @@ An installer and live system for [Wizzie Wizzie Computer Coding Club](http://www
 
 ## Contents
 
-This repository contains a number of scripts to be used with Debian Live. When run, they will generate an OS image that can be loaded on a USB stick. The USB stick can then be user as both:
+This repository contains a number of scripts to be used with Debian Live. When run, they will generate an OS image that can be loaded on a USB stick. The USB stick can then be used as both:
 
   * A live system: run the environment completely off the USB drive without installing to disk, or altering the host computer in any way
 
