@@ -44,7 +44,7 @@ As mentioned above, do everything as root. Using `sudo` is not enough.
 First install live-build and git:
 
 ```
-# apt-get install live-build git
+# apt-get install live-build git make
 ```
 
 Next, clone this repository:
@@ -57,7 +57,7 @@ And finally, run a build:
 
 ```
 # cd w2c3-livecd
-# lb clean && lb config && lb build
+# make
 ```
 
 This will take a while! The first time it will download packages over the Internet and will take longer. Fortunately, these will be cached (under `cache/`) making this step faster in subsequent builds.
