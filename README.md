@@ -82,11 +82,11 @@ Check out the [Debian Live manual](https://debian-live.alioth.debian.org/live-ma
 
 A strange problem with proprietary drivers is that they don't seem to apply during installation. They are OK after install, or when running the live system.
 
-This means it's not possible to download updated packages from the Internet if you are installing on a laptop that requires proprietary network drivers, for example.
+This means that, for example, it's not possible to download updated packages from the Internet if you are installing on a laptop that requires proprietary network drivers.
 
-Initially I thought this would be a problem, and set out to fix it. I put together a writeup here: [http://blog.pablobm.com/post/125538410950/proprietary-drivers-on-a-custom-debian-installer]
+Initially I thought this would be a problem, and set out to fix it. I put together a writeup here: http://blog.pablobm.com/post/125538410950/proprietary-drivers-on-a-custom-debian-installer
 
-However, it's not a problem anymore, because at present we include all the packages we need. We want to avoid using the Internet during installation, because we normally run our coding club on places where WiFi is spotty at best.
+However, this is not a problem anymore as at present we include all the packages we need. We want to avoid using the Internet during installation, because we normally run our coding club on places where WiFi is spotty at best.
 
 At some point I'll remove the changes I made to make this work.
 
