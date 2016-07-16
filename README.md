@@ -12,7 +12,7 @@ This repository contains a number of scripts to be used with Debian Live. When r
 
 ## How to run a build
 
-The [Debian Live manual](http://live-systems.org/manual/stable/html/live-manual.en.html) has a pretty good "For the impatient" section. That's a good place to start learning what all this is about. Or you can just read this section for now.
+The [Debian Live manual](https://debian-live.alioth.debian.org/live-manual/stable/manual/html/live-manual.en.html) has a pretty good "For the impatient" section. That's a good place to start learning what all this is about. Or you can just read this section for now.
 
 ### Setting up a virtual machine
 
@@ -68,7 +68,7 @@ There are some "special" customisations on these scripts, but mostly it's all pr
 
 ### The standard bits
 
-Check out the [Debian Live manual](http://live-systems.org/manual/stable/html/live-manual.en.html) to get familiar with the basics of creating a package. Some quick notes:
+Check out the [Debian Live manual](https://debian-live.alioth.debian.org/live-manual/stable/manual/html/live-manual.en.html) to get familiar with the basics of creating a package. Some quick notes:
 
   * See `config/package-lists` for lists of packages that are included in the build
 
