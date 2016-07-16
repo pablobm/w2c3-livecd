@@ -90,28 +90,6 @@ However, it's not a problem anymore, because at present we include all the packa
 
 At some point I'll remove the changes I made to make this work.
 
-### Alice
-
-Getting Alice (the 3D development environment) installed wasn't trivial. Problems:
-
-  * The Alice installer is a large binary, nearly 1GB at the time of writing, not suitable to be under version control
-  * The alternative is downloading it (with wget or similar) when running the build
-  * However downloading it every time we run a build is cumbersome
-  * We can cache it in `cache/` along with the debian packages downloaded during the build, downloading it only when not present
-  * But when installing it (in a chroot hook), we are in a chroot jail and cannot access the cached files
-
-Solution:
-
-  * Download the Alice installer to `cache/` (if not already downloaded)
-  * Run a simple http server (using Python's built-in `SimpleHTTPServer`) that can serve the installer
-  * Run the build
-  * On a chroot hook, download the installer from the local http server into the chroot jail
-  * Run the installer
-
-Additionally, there's the file `alice.varfile`, which provides installation details. It allows running the installer in non-interactive mode.
-
-The main relevant files in this process are `auto/build` and `scripts/*`.
-
 ## TODO
 
 Add KidsRuby package.
