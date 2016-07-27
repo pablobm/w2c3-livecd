@@ -20,7 +20,7 @@ You'll need a Debian system. A virtual machine is recommended because you'll hav
 
 You can use [VirtualBox](https://www.virtualbox.org/) or any similar software. This is the process with VirtualBox:
 
-  1. Download a Debian ISO (amd64) from [https://www.debian.org/distrib/netinst]. The "Small CD" one should make it.
+  1. Download a Debian ISO (amd64) from https://www.debian.org/distrib/netinst. The "Small CD" one should make it.
 
   2. Install VirtualBox, downloading the appropriate version for your host OS: https://www.virtualbox.org/wiki/Downloads
 
@@ -68,7 +68,7 @@ There are some "special" customisations on these scripts, but mostly it's all pr
 
 ### The standard bits
 
-Check out the [Debian Live manual](https://debian-live.alioth.debian.org/live-manual/stable/manual/html/live-manual.en.html) to get familiar with the basics of creating a package. Some quick notes:
+Check out the [Debian Live manual](https://debian-live.alioth.debian.org/live-manual/stable/manual/html/live-manual.en.html) to get familiar with the basics of creating a build. Some quick notes:
 
   * See `config/package-lists` for lists of packages that are included in the build
 
