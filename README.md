@@ -28,9 +28,10 @@ You can use [VirtualBox](https://www.virtualbox.org/) or any similar software. T
 
   4. Install and boot
 
-  5. You'll need the Guest Additions package. On the menu bar, go to "Devices > Install Guest Additions CD image", and install as follows:
+  5. You'll need the Guest Additions package, which in turns requires some development packages. On the menu bar, go to "Devices > Install Guest Additions CD image", and install as follows:
 
 ```
+# apt-get install make gcc linux-headers-amd64
 # cd /media/cdrom
 # sh VBoxLinuxAdditions.run
 ```
