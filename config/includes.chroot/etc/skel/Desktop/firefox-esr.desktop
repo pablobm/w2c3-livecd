@@ -2,3 +2,4 @@
 Type=Link
 Name=Web Browser
 Icon=firefox-esr
+URL=/usr/share/applications/firefox-esr.desktop
