@@ -1,5 +1,6 @@
 [Desktop Entry]
 Type=Link
-Name=Web Browser
+Name=Firefox
 Icon=firefox-esr
 URL=/usr/share/applications/firefox-esr.desktop
+Name[en_GB]=Web Browser
