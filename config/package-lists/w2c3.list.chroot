@@ -1,6 +1,6 @@
 task-laptop
 task-lxde-desktop
-iceweasel
+firefox-esr
 
 ruby2.1
 ruby2.1-doc
