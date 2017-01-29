@@ -1,6 +1,7 @@
 task-laptop
 task-lxde-desktop
 firefox-esr
+ntp
 
 ruby2.1
 ruby2.1-doc
