@@ -48,6 +48,20 @@ First install live-build and git:
 # apt-get install live-build git
 ```
 
+---
+**NOTE**: due a current bug in Debian's Flash plugin package, there's an intermediate step to perform at this stage, at least for the time being:
+
+1. Go to Adobe Flash's website (https://get.adobe.com/flashplayer).
+2. Download the Linux 64bit version.
+3. Extract the file `libflashplayer.so`.
+4. Put this file in the folder `config/includes.chroot/tmp` in this project.
+
+Now you should be able to proceed as normal.
+
+For more information, you can find a description of the bug at https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=851066 
+
+---
+
 Next, clone this repository:
 
 ```
