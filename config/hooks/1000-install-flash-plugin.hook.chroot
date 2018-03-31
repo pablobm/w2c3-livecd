@@ -4,7 +4,7 @@ PLUGIN_SOURCE_PATH="/live-build/config/includes.chroot/tmp/libflashplayer.so"
 PLUGIN_DIR="/usr/lib/flashplugin-nonfree"
 PLUGIN_PATH="$PLUGIN_DIR/$(basename "$PLUGIN_SOURCE_PATH")"
 
-mv "$PLUGIN_SOURCE_PATH" "$PLUGIN_PATH"
+cp "$PLUGIN_SOURCE_PATH" "$PLUGIN_PATH"
 chmod 644 "$PLUGIN_PATH"
 chown root:root "$PLUGIN_PATH"
 update-alternatives --quiet --install \
