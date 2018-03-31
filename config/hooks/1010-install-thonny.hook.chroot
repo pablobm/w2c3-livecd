@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+INSTALLER_PATH="/live-build/config/includes.chroot/tmp/thonny-installer"
+
+cp $(INSTALLER_PATH) /etc/skel/home/Documents/
