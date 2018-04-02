@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+set -e
+
+DOWNLOADS_CACHE_DIR="/live-build/config/includes.chroot/tmp/Downloads"
+DEST_DIR="/etc/skel/Downloads"
+
+mkdir -p "$DEST_DIR"
+cp -pr "$DOWNLOADS_CACHE_DIR"/* "$DEST_DIR/"

@@ -1,13 +1,16 @@
 ARCH=x86_64
-FLASH_PLUGIN=config/includes.chroot/tmp/libflashplayer.so
-THONNY_URL=https://bitbucket.org/plas/thonny/downloads/thonny-2.1.17-$(ARCHITECTURE).tar.gz
-THONNY_PACKAGE=config/includes.chroot/tmp/thonny-installer
+FILES_CACHE_DIR=config/includes.chroot/tmp
+DOWNLOADS_CACHE_DIR=$(FILES_CACHE_DIR)/Downloads
+FLASH_PLUGIN=$(FILES_CACHE_DIR)/libflashplayer.so
+THONNY_PACKAGE=thonny-2.1.17-$(ARCH).tar.gz
+THONNY_URL=https://bitbucket.org/plas/thonny/downloads/$(THONNY_PACKAGE)
+THONNY_DOWNLOAD_PATH=$(DOWNLOADS_CACHE_DIR)/$(THONNY_PACKAGE)
 
 .PHONY: default
 
 default: live-image-amd64.hybrid.iso
 	
-live-image-amd64.hybrid.iso: $(FLASH_PLUGIN) $(THONNY_PACKAGE)
+live-image-amd64.hybrid.iso: $(FLASH_PLUGIN) $(THONNY_DOWNLOAD_PATH)
 	lb clean && lb config && lb build
 
 $(FLASH_PLUGIN):
@@ -20,5 +23,6 @@ $(FLASH_PLUGIN):
 	@echo "=========================================="
 	@exit 1
 
-$(THONNY_PACKAGE):
-	curl -sS $(THONNY_URL) > $(THONNY_PACKAGE)
+$(THONNY_DOWNLOAD_PATH):
+	mkdir -p $(DOWNLOADS_CACHE_DIR)
+	wget -O $(THONNY_DOWNLOAD_PATH) $(THONNY_URL)
