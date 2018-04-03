@@ -1,6 +1,6 @@
 ARCH=x86_64
 FILES_CACHE_DIR=config/includes.chroot/tmp
-DOWNLOADS_CACHE_DIR=$(FILES_CACHE_DIR)/Downloads
+DOWNLOADS_CACHE_DIR=$(FILES_CACHE_DIR)/downloads
 FLASH_PLUGIN=$(FILES_CACHE_DIR)/libflashplayer.so
 THONNY_PACKAGE=thonny-2.1.17-$(ARCH).tar.gz
 THONNY_URL=https://bitbucket.org/plas/thonny/downloads/$(THONNY_PACKAGE)
