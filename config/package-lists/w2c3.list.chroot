@@ -3,10 +3,6 @@ task-lxde-desktop
 firefox-esr
 ntp
 
-ruby2.1
-ruby2.1-doc
-python-pygame
-flashplugin-nonfree
 jedit
 git
 gcc
