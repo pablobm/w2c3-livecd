@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+set -e
+
+DOWNLOADS_CACHE_DIR="/live-build/config/includes.chroot/tmp/downloads"
+DEST_DIR="/usr/share/w2c3/software"
+
+mkdir -p "$DEST_DIR"
+cp -pr "$DOWNLOADS_CACHE_DIR"/* "$DEST_DIR/"
