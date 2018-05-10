@@ -104,3 +104,7 @@ Initially I thought this would be a problem, and set out to fix it. I put togeth
 However, this is not a problem anymore as at present we include all the packages we need. We want to avoid using the Internet during installation, because we normally run our coding club on places where WiFi is spotty at best.
 
 At some point I'll remove the changes I made to make this work.
+
+### Root access
+
+For root access, use `sudo`. The password is just `password`. On older installs, use `su` with the same password. Feel free to tinker with this. The worst that can happen is that the machine has to be reinstalled again, so no problem.
