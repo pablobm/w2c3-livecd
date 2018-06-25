@@ -16,11 +16,11 @@ The [Debian Live manual](https://debian-live.alioth.debian.org/live-manual/stabl
 
 ### Setting up a virtual machine
 
-You'll need a Debian system. A virtual machine is recommended because you'll have to run everything as root: `sudo` is not enough.
+You'll need a Debian Stretch (version 9) system. A virtual machine is recommended because you'll have to run everything as root: `sudo` is not enough.
 
 You can use [VirtualBox](https://www.virtualbox.org/) or any similar software. This is the process with VirtualBox:
 
-  1. Download a Debian ISO (amd64) from https://www.debian.org/distrib/netinst. The "Small CD" one should make it.
+  1. Download a Debian ISO. Version should be Stretch (v9) and architecture amd64: https://www.debian.org/distrib/netinst. The "Small CD" one should make it.
 
   2. Install VirtualBox, downloading the appropriate version for your host OS: https://www.virtualbox.org/wiki/Downloads
 
@@ -48,27 +48,20 @@ First install live-build and git:
 # apt-get install live-build git
 ```
 
----
-**NOTE**: due a current bug in Debian's Flash plugin package, there's an intermediate step to perform at this stage, at least for the time being:
-
-1. Go to Adobe Flash's website (https://get.adobe.com/flashplayer).
-2. Download the Linux 64bit version.
-3. Extract the file `libflashplayer.so`.
-4. Put this file in the folder `config/includes.chroot/tmp` in this project.
-
-Now you should be able to proceed as normal.
-
-For more information, you can find a description of the bug at https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=851066 
-
----
-
 Next, clone this repository:
 
 ```
 # git clone https://github.com/pablobm/w2c3-livecd.git
 ```
 
-And finally, run a build:
+Since the Flash plugin is not available in the Debian repository, we'll have to provide it manually:
+
+1. Go to Adobe Flash's website (https://get.adobe.com/flashplayer).
+2. Download the Linux 64bit version.
+3. Put this file in the folder `config/includes.chroot/tmp` in this project.
+
+
+Finally, run a build:
 
 ```
 # cd w2c3-livecd
@@ -107,4 +100,4 @@ At some point I'll remove the changes I made to make this work.
 
 ### Root access
 
-For root access, use `sudo`. The password is just `password`. On older installs, use `su` with the same password. Feel free to tinker with this. The worst that can happen is that the machine has to be reinstalled again, so no problem.
+For root access, use `sudo`. The password is just `password`. On older installs, use `su` with the same password. Feel free to tinker. The worst that can happen is that the machine has to be reinstalled again, so no problem.
