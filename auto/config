@@ -3,7 +3,6 @@
 set -e
 
 lb config noauto \
-	--architectures i386 \
 	--archive-areas 'main contrib non-free' \
 	--debian-installer live \
 	--debian-installer-preseedfile preseed.cfg \
