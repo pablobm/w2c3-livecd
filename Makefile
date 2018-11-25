@@ -17,14 +17,16 @@ GIT_BRANCH=$(shell git branch | grep '^*' | cut -d' ' -f2)
 DATE=$(shell date +"%Y-%m-%d")
 BUILD_MSG="build: $(DATE)^$(GIT_BRANCH)"
 FINGERPRINTED_WALLPAPER=$(INCLUDES_DIR)/usr/share/w2c3/desktop-wallpaper.png
-ISO=live-image-$(ARCH).hybrid.ido
+ISO=live-image-$(ARCH).hybrid.iso
 
 amd64:
 	ARCH=amd64 THONNY_ARCH=x86_64 FLASH_ARCH=x86_64 $(MAKE) iso
 i386:
 	ARCH=i386 THONNY_ARCH=i686 FLASH_ARCH=i386 $(MAKE) iso
 
-iso: $(FLASH_PLUGIN_PATH) $(THONNY_DOWNLOAD_PATH) fingerprint
+iso: $(FLASH_PLUGIN_PATH) $(THONNY_DOWNLOAD_PATH) fingerprint $(ISO)
+
+$(ISO):
 	cp $(FLASH_PLUGIN_PATH) $(FLASH_PLUGIN_PATH_OMIT_ARCH)
 	lb clean && lb config --architectures $(ARCH) && lb build
 
