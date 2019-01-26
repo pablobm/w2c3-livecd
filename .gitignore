@@ -10,7 +10,8 @@ live-image-*
 .build/
 build.log
 
-cache/
+cache
+cache-*
 
 chroot/
 chroot.packages.*

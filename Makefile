@@ -21,6 +21,9 @@ i386:
 iso: $(FLASH_PLUGIN_PATH) $(THONNY_DOWNLOAD_PATH) $(ISO)
 
 $(ISO):
+	rm -f cache
+	mkdir -p cache-$(ARCH)
+	ln -s cache-$(ARCH) cache
 	cp $(FLASH_PLUGIN_PATH) $(FLASH_PLUGIN_PATH_OMIT_ARCH)
 	lb clean && lb config --architectures $(ARCH) && lb build
 
