@@ -53,21 +53,22 @@ class CorrectionFactor:
 
 def run(line):
     print(line)
-    subprocess.run(line.split(" "))
+    proc = subprocess.Popen(line.split(" "), stdout=subprocess.PIPE)
+    return proc.communicate()[0]
 
 displays = []
-result = subprocess.run(['xrandr'], capture_output=True)
-for line in result.stdout.decode('utf8').splitlines():
+result = run('xrandr')
+for line in result.decode('utf8').splitlines():
     m = re.search(r'^(\S+) connected (primary)?', line)
     if m:
         display = Display()
-        display.name = m[1]
-        display.is_primary = bool(m[2])
+        display.name = m.group(1)
+        display.is_primary = bool(m.group(2))
         displays.append(display)
     else:
         m = re.search(r'^\s+(\d+)x(\d+) ', line)
         if m:
-            mode = Mode(int(m[1]), int(m[2]))
+            mode = Mode(int(m.group(1)), int(m.group(2)))
             display.modes.append(mode)
 
 dinfo = DisplayInfo(displays)
