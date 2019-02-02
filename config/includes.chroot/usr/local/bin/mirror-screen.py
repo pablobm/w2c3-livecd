@@ -7,11 +7,11 @@ class DisplayInfo:
 
     @property
     def primary(self):
-    	try:
-    	    return next(d for d in self.displays if d.is_primary)
-    	except StopIteration:
-    	    # No screeen marked as primary
-    	    None
+        try:
+            return next(d for d in self.displays if d.is_primary)
+        except StopIteration:
+            # No screeen marked as primary
+            None
 
     @property
     def secondaries(self):
