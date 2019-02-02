@@ -7,7 +7,11 @@ class DisplayInfo:
 
     @property
     def primary(self):
-        return next(d for d in self.displays if d.is_primary)
+    	try:
+    	    return next(d for d in self.displays if d.is_primary)
+    	except StopIteration:
+    	    # No screeen marked as primary
+    	    None
 
     @property
     def secondaries(self):
@@ -37,7 +41,9 @@ class Mode:
         self.h = h
 
     def correction_for(self, other):
-        return CorrectionFactor(self.w / other.w, self.h / other.h)
+        print self
+        print other
+        return CorrectionFactor(float(self.w) / other.w, float(self.h) / other.h)
 
     def __str__(self):
         return '%sx%s' % (self.w, self.h)
@@ -73,11 +79,18 @@ for line in result.decode('utf8').splitlines():
 
 dinfo = DisplayInfo(displays)
 primary = dinfo.primary
+if not primary:
+    try:
+        heuristic_primary = next(d for d in dinfo.displays if d.name == 'LVDS1')
+    except StopIteration:
+        raise Exception
+    primary = heuristic_primary
+    primary.is_primary = True
+
 pmode = primary.max_mode
 
 run('xrandr --output %s --mode %s --pos 0x0' % (primary.name, pmode))
 for d in dinfo.secondaries:
     smode = d.max_mode
     correction = pmode.correction_for(smode)
-    print(correction)
     run('xrandr --output %s --pos 0x0 --mode %s --scale %s' % (d.name, smode, correction))
