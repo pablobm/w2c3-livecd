@@ -4,3 +4,5 @@ Name=Mirror Screens
 Icon=preferences-desktop-display
 Exec=/usr/local/bin/mirror-screens
 GenericName=Make other screens mirror the primary
+Terminal=true
+X-KeepTerminal=false
