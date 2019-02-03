@@ -21,7 +21,7 @@ live-image-amd64.hybrid.iso: $(FLASH_PLUGIN_PATH) $(THONNY_DOWNLOAD_PATH) finger
 	lb clean && lb config && lb build
 
 fingerprint:
-	convert $(ORIGINAL_WALLPAPER) -size 250x50 -gravity NorthWest -pointsize 20 -font CourierNewB -fill white -draw 'text 10,10 $(BUILD_MSG)' $(FINGERPRINTED_WALLPAPER)
+	convert $(ORIGINAL_WALLPAPER) -size 250x50 -gravity NorthWest -pointsize 20 -font courier -fill white -draw 'text 10,10 $(BUILD_MSG)' $(FINGERPRINTED_WALLPAPER)
 
 $(FLASH_PLUGIN_PATH):
 	@echo "=========================================="
