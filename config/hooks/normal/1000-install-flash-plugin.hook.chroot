@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 GOODIES_DIR_PATH="/live-build/config/includes.chroot/tmp"
-PACKAGE_FILE="flash_player_npapi_linux.x86_64.tar.gz"
+PACKAGE_FILE="flash_player_npapi_linux.tar.gz"
 PACKAGE_PATH="$GOODIES_DIR_PATH/$PACKAGE_FILE"
 
 cd /
