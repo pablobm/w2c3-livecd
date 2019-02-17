@@ -24,6 +24,7 @@ config/source
 
 config/build
 config/includes.chroot/tmp
+config/includes.chroot/usr/share/w2c3/desktop-wallpaper.png
 
 source/
 source*.iso
