@@ -45,7 +45,7 @@ As mentioned above, do everything as root. Using `sudo` is not enough.
 First install live-build and git:
 
 ```
-# apt-get install live-build git
+# apt-get install live-build git imagemagick
 ```
 
 Next, clone this repository:
