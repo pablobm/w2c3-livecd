@@ -1,6 +1,13 @@
 #!/usr/bin/env python
-import re
+"""
+A Python script to get secondary screens mirroring the primary.
+
+This script uses the `xrandr` tool to figure out what secondary
+screens are available, and then maps them (using scaling) over the
+portion of X11's virtual screen covered by the primary.
+"""
 import subprocess
+import re
 
 class DisplayInfo:
     def __init__(self, displays):
@@ -8,46 +15,70 @@ class DisplayInfo:
 
     @property
     def primary(self):
+        return self._find_screen_with_primary_marker() or self._find_first_screen_with_current_mode_marker()
+
+    def _find_screen_with_primary_marker(self):
         try:
-            return next(d for d in self.displays if d.is_primary)
+            return next(d for d in self.displays if d.marked_primary)
         except StopIteration:
             # No screeen marked as primary
             None
 
+    def _find_first_screen_with_current_mode_marker(self):
+        try:
+            return next(d for d in self.displays if d.current_mode)
+        except StopIteration:
+            # No screeen with a mode marked as current
+            None
+
     @property
     def secondaries(self):
-        return [d for d in self.displays if not d.is_primary]
+        primary = self.primary
+        return [d for d in self.displays if d != primary]
 
 
 class Display:
     def __init__(self):
         self.name = None
-        self.is_primary = False
+        self.marked_primary = False
         self.modes = []
 
     @property
-    def max_mode(self):
-        best = None
-        max_prod = 0
-        for m in self.modes:
-            if max_prod < m.w * m.h:
-                best = m
-                max_prod = m.w * m.h
-        return best
+    def current_mode(self):
+        try:
+            return next(d for d in self.modes if d.marked_current)
+        except StopIteration:
+            # No screeen with a mode marked as current
+            None
+
+    @property
+    def preferred_mode(self):
+        return next(m for m in self.modes if m.marked_preferred)
 
 
 class Mode:
-    def __init__(self, w, h):
+    def __init__(self, w, h, marked_current=False, marked_preferred=False):
         self.w = w
         self.h = h
+        self.marked_current = marked_current
+        self.marked_preferred = marked_preferred
 
     def correction_for(self, other):
-        print self
-        print other
-        return CorrectionFactor(float(self.w) / other.w, float(self.h) / other.h)
+        ratio = min([float(self.w) / other.w, float(self.h) / other.h])
+        return CorrectionFactor(ratio, ratio)
 
     def __str__(self):
         return '%sx%s' % (self.w, self.h)
+
+    def __repr__(self):
+        args = [repr(self.w), repr(self.h)]
+        named_attrs = ["marked_current", "marked_preferred"]
+        for name in named_attrs:
+            value = getattr(self, name)
+            args.append("%s=%s", name, repr(value))
+
+        _attrs = ", ".join(attrs)
+        return "%s(%s)" % (self.__class__.__name__, _attrs)
 
 
 class CorrectionFactor:
@@ -58,40 +89,55 @@ class CorrectionFactor:
     def __str__(self):
         return '%sx%s' % (self.x, self.y)
 
+def parse(input_str):
+    displays = []
+    display = None
+    for line in input_str.splitlines():
+        maybe_display = parse_display_line(line)
+        if maybe_display:
+            display = maybe_display
+            displays.append(display)
+            continue
+        mode = parse_mode_line(line)
+        if mode:
+            display.modes.append(mode)
+
+    return DisplayInfo(displays)
+
+def parse_display_line(line):
+    m = re.search(r'^(\S+) connected (primary)?', line)
+    if m:
+        display = Display()
+        display.name = m.group(1)
+        display.marked_primary = bool(m.group(2))
+        return display
+
+def parse_mode_line(line):
+    m = re.search(r'^\s+(\d+)x(\d+)\s+[0-9\.]+([* ])([+ ])', line)
+    if m:
+        width = int(m.group(1))
+        height = int(m.group(2))
+        marked_current = m.group(3) == "*"
+        marked_preferred = m.group(4) == "+"
+        mode = Mode(width, height, marked_current=marked_current, marked_preferred=marked_preferred)
+        return mode
+
+
 def run(line):
     print(line)
     proc = subprocess.Popen(line.split(" "), stdout=subprocess.PIPE)
     return proc.communicate()[0]
 
-displays = []
-result = run('xrandr')
-for line in result.decode('utf8').splitlines():
-    m = re.search(r'^(\S+) connected (primary)?', line)
-    if m:
-        display = Display()
-        display.name = m.group(1)
-        display.is_primary = bool(m.group(2))
-        displays.append(display)
-    else:
-        m = re.search(r'^\s+(\d+)x(\d+) ', line)
-        if m:
-            mode = Mode(int(m.group(1)), int(m.group(2)))
-            display.modes.append(mode)
+def raw_read_current_displays():
+    return run('xrandr').decode('utf8')
 
-dinfo = DisplayInfo(displays)
+raw_data = raw_read_current_displays()
+dinfo = parse(raw_data)
 primary = dinfo.primary
-if not primary:
-    try:
-        heuristic_primary = next(d for d in dinfo.displays if d.name == 'LVDS1')
-    except StopIteration:
-        raise Exception
-    primary = heuristic_primary
-    primary.is_primary = True
-
-pmode = primary.max_mode
+pmode = primary.preferred_mode
 
 run('xrandr --output %s --mode %s --pos 0x0' % (primary.name, pmode))
 for d in dinfo.secondaries:
-    smode = d.max_mode
+    smode = d.preferred_mode
     correction = pmode.correction_for(smode)
     run('xrandr --output %s --pos 0x0 --mode %s --scale %s' % (d.name, smode, correction))
