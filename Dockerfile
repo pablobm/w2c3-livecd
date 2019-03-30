@@ -8,5 +8,4 @@ RUN apt-get install -y make live-build git imagemagick
 
 COPY . /workspace
 
-#CMD ["make"]
-CMD make && mv live-image-*.iso /output/ && ls /output
+CMD make && mv live-image-* /output/

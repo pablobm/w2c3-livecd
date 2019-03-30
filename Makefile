@@ -39,4 +39,4 @@ $(THONNY_DOWNLOAD_PATH):
 
 docker-build:
 	docker build . -t w2c3-livecd
-	docker run --privileged --mount source=w2c3-livecd,target=/output w2c3-livecd
+	docker run --privileged --mount type=bind,source=$(CURDIR)/output,target=/output w2c3-livecd
