@@ -36,3 +36,7 @@ $(FLASH_PLUGIN_PATH):
 $(THONNY_DOWNLOAD_PATH):
 	mkdir -p $(DOWNLOADS_CACHE_DIR)
 	wget -O $(THONNY_DOWNLOAD_PATH) $(THONNY_URL)
+
+docker-build:
+	docker build . -t w2c3-livecd
+	docker run --privileged --mount source=w2c3-livecd,target=/output w2c3-livecd
