@@ -5,7 +5,6 @@ binary*.tar*
 binary*.contents
 binary*.packages
 binary*.zsync
-live-image-*
 
 .build/
 build.log
