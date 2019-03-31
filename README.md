@@ -12,23 +12,73 @@ This repository contains a number of scripts to be used with Debian Live. When r
 
 ## How to run a build
 
-The [Debian Live manual](https://debian-live.alioth.debian.org/live-manual/stable/manual/html/live-manual.en.html) has a pretty good "For the impatient" section. That's a good place to start learning what all this is about. Or you can just read this section for now.
+The final product of a build is a disk image that you can transfer to a USB drive. There are two different ways of running a build:
+
+* With Docker: this is the simplest way and is preferred.
+* Natively on Debian: takes longer to set up, but it's the only option if you are on a system that doesn't support Docker.
+
+Independently of the chosen method, running a build will take a while. The first time it will download packages over the Internet and will take longer. Fortunately, many of these will be cached making this step faster in subsequent builds.
+
+### Common setup steps
+
+Start by cloning this repository if you haven't yet:
+
+```
+$ git clone https://github.com/pablobm/w2c3-livecd.git
+```
+
+We also need to manually provide the Flash plugin:
+
+1. Go to Adobe Flash's website (https://get.adobe.com/flashplayer).
+2. Download the Linux 64bit version.
+3. Put this file in the folder `config/includes.chroot/tmp` in this project.
+
+That's it for the common steps.
+
+## The Docker option
+
+For this you need:
+
+* A machine and operating system able to run Docker. Any modern computer should be able to run this, on Windows, Linux, or macOS. I'm not an expert though.
+* Docker installed: https://www.docker.com/get-started.
+* GNU Make. How to install this depends on your system. For example, on Debian it would be `sudo apt-get install make`. On macOS with Homebrew, you can do `brew install make`.
+
+Once you are set up, clone this repo from the command line, as follows:
+
+```
+$ git clone https://github.com/pablobm/w2c3-livecd.git
+```
+
+Finally, run a build:
+
+```
+$ cd w2c3-livecd
+$ make docker-build
+```
+
+The end results will appear in the `output/` folder.
+
+## The native option
+
+If your machine doesn't support Docker, or you otherwise prefer not to use it, follow this guide. You'll need a Debian Stretch (version 9) system.
+
+Even though this section is called "the native option", a virtual machine is still recommended.
+
+Note that you'll have to run everything as root: `sudo` doesn't appear to be enough.
 
 ### Setting up a virtual machine
 
-You'll need a Debian Stretch (version 9) system. A virtual machine is recommended because you'll have to run everything as root: `sudo` is not enough.
+If you choose to use a virtual machine, the setup might be different depending on the software you use. This is the process with VirtualBox:
 
-You can use [VirtualBox](https://www.virtualbox.org/) or any similar software. This is the process with VirtualBox:
+  1. Download a Debian ISO. Version should be Stretch (v9) and architecture amd64: https://www.debian.org/distrib/netinst. The "Small CD" one should do it.
 
-  1. Download a Debian ISO. Version should be Stretch (v9) and architecture amd64: https://www.debian.org/distrib/netinst. The "Small CD" one should make it.
+  2. Install VirtualBox, downloading the appropriate version for your host OS: https://www.virtualbox.org/wiki/Downloads.
 
-  2. Install VirtualBox, downloading the appropriate version for your host OS: https://www.virtualbox.org/wiki/Downloads
+  3. Create VM to run Linux Debian 64 bit. I recommend a 25GB hard drive. I'm also assigning it 1024 MB memory, but can't be sure what's better there.
 
-  3. Create VM to run Linux Debian 64 bit. I recommend a 20GB hard drive. I'm also assigning it 1024 MB memory, but can't be sure what's better there
+  4. Install and boot.
 
-  4. Install and boot
-
-  5. You'll need the Guest Additions package, which in turns requires some development packages. On the menu bar, go to "Devices > Install Guest Additions CD image", and install as follows:
+  5. You'll need the Guest Additions package, which in turns requires some development packages. On the menu bar, go to "Devices > Install Guest Additions CD image", and install as follows (as root):
 
 ```
 # apt-get install make gcc linux-headers-amd64
@@ -42,33 +92,19 @@ Finally restart the VM and you'll be set.
 
 As mentioned above, do everything as root. Using `sudo` is not enough.
 
-First install live-build and git:
+First install the required packages:
 
 ```
-# apt-get install live-build git imagemagick
+# apt-get install live-build imagemagick
 ```
-
-Next, clone this repository:
-
-```
-# git clone https://github.com/pablobm/w2c3-livecd.git
-```
-
-Since the Flash plugin is not available in the Debian repository, we'll have to provide it manually:
-
-1. Go to Adobe Flash's website (https://get.adobe.com/flashplayer).
-2. Download the Linux 64bit version.
-3. Put this file in the folder `config/includes.chroot/tmp` in this project.
-
 
 Finally, run a build:
 
 ```
-# cd w2c3-livecd
 # make
 ```
 
-This will take a while! The first time it will download packages over the Internet and will take longer. Fortunately, these will be cached (under `cache/`) making this step faster in subsequent builds.
+The end results will appear in the `output/` folder.
 
 ## Implementation details
 
@@ -76,7 +112,9 @@ There are some "special" customisations on these scripts, but mostly it's all pr
 
 ### The standard bits
 
-Check out the [Debian Live manual](https://debian-live.alioth.debian.org/live-manual/stable/manual/html/live-manual.en.html) to get familiar with the basics of creating a build. Some quick notes:
+Check out the [Debian Live manual](https://live-team.pages.debian.net/live-manual/html/live-manual/index.en.html) to get familiar with the basics of creating a build. There's a pretty good "For the impatient" section to get started.
+
+Some quick notes:
 
   * See `config/package-lists` for lists of packages that are included in the build
 

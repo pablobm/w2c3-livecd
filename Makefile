@@ -18,7 +18,7 @@ FINGERPRINTED_WALLPAPER=$(INCLUDES_DIR)/usr/share/w2c3/desktop-wallpaper.png
 default: live-image-amd64.hybrid.iso
 
 live-image-amd64.hybrid.iso: $(FLASH_PLUGIN_PATH) $(THONNY_DOWNLOAD_PATH) fingerprint
-	lb clean && lb config && lb build
+	lb clean && lb config && lb build && mv live-image-* ./output/
 
 fingerprint:
 	convert $(ORIGINAL_WALLPAPER) -size 250x50 -gravity NorthWest -pointsize 20 -font courier -fill white -draw 'text 10,10 $(BUILD_MSG)' $(FINGERPRINTED_WALLPAPER)
@@ -39,4 +39,4 @@ $(THONNY_DOWNLOAD_PATH):
 
 docker-build:
 	docker build . -t w2c3-livecd
-	docker run --privileged --mount type=bind,source=$(CURDIR)/output,target=/output --mount source=w2c3-livecd-cache,target=/workspace/cache w2c3-livecd
+	docker run --privileged --mount type=bind,source=$(CURDIR)/output,target=/workspace/output --mount source=w2c3-livecd-cache,target=/workspace/cache w2c3-livecd
