@@ -43,16 +43,9 @@ For this you need:
 * Docker installed: https://www.docker.com/get-started.
 * GNU Make. How to install this depends on your system. For example, on Debian it would be `sudo apt-get install make`. On macOS with Homebrew, you can do `brew install make`.
 
-Once you are set up, clone this repo from the command line, as follows:
+If everything is in place, you can now run a build:
 
 ```
-$ git clone https://github.com/pablobm/w2c3-livecd.git
-```
-
-Finally, run a build:
-
-```
-$ cd w2c3-livecd
 $ make docker-build
 ```
 
