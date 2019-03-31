@@ -46,7 +46,7 @@ For this you need:
 If everything is in place, you can now run a build:
 
 ```
-$ make docker-build
+$ make
 ```
 
 The end results will appear in the `output/` folder.
@@ -94,7 +94,7 @@ This should be enough:
 As mentioned above, do everything as root. Using `sudo` is not enough. Use Make to run the build:
 
 ```
-# make
+# make image
 ```
 
 The end results will appear in the `output/` folder.
