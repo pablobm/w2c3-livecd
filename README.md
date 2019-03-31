@@ -33,7 +33,7 @@ We also need to manually provide the Flash plugin:
 2. Download the Linux 64bit version.
 3. Put this file in the folder `config/includes.chroot/tmp` in this project.
 
-That's it for the common steps.
+Next, follow the instructions on the section appropriate for your preferred build method.
 
 ## The Docker option
 
