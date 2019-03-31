@@ -83,15 +83,15 @@ Finally restart the VM and you'll be set.
 
 ### Installing required packages
 
-As mentioned above, do everything as root. Using `sudo` is not enough.
-
-First install the required packages:
+This should be enough:
 
 ```
 # apt-get install live-build imagemagick
 ```
 
-Finally, run a build:
+### Running the build
+
+As mentioned above, do everything as root. Using `sudo` is not enough. Use Make to run the build:
 
 ```
 # make
