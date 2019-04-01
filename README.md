@@ -57,7 +57,7 @@ If your machine doesn't support Docker, or you otherwise prefer not to use it, f
 
 Even though this section is called "the native option", a virtual machine is still recommended.
 
-Note that you'll have to run everything as root: `sudo` doesn't appear to be enough.
+Note that the given lines assume that you are root, as it's required in the last step anyway.
 
 ### Setting up a virtual machine
 
@@ -91,7 +91,7 @@ This should be enough:
 
 ### Running the build
 
-As mentioned above, do everything as root. Using `sudo` is not enough. Use Make to run the build:
+Finally you run Make. This has to be done as root (or so it appeared last time I tried to just sudo it):
 
 ```
 # make image
