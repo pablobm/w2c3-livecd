@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Mirror Screens
+Icon=preferences-desktop-display
+Exec=/usr/bin/env python /opt/mirror_screens.py.zip
+GenericName=Make other screens mirror the primary
+Terminal=true
+X-KeepTerminal=false
