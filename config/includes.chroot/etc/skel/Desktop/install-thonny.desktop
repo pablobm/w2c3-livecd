@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Install Thonny
+Comment=Install the Thonny Python IDE for beginners
+Exec=bash -c 'bash <(wget -O - https://thonny.org/installer-for-linux)'
+Icon=utilities-terminal
+Terminal=true 
+Type=Application
