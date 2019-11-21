@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Pygame Tutorial
+Comment=pablobm's pygame tutorial
+Exec=/usr/bin/firefox https://pablobm.github.io/pygame-tutorial/
+Icon=firefox
+Terminal=false 
+Type=Application
